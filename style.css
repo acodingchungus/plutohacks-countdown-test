@@ -1,0 +1,210 @@
+:root {
+  --bg: #050816;
+  --bg-2: #0b1024;
+  --panel: rgba(13, 18, 34, 0.8);
+  --panel-border: rgba(132, 162, 255, 0.35);
+  --text: #edf3ff;
+  --muted: #a9bbdb;
+  --accent: #7dd3fc;
+  --accent-2: #b794f4;
+  --glow: rgba(125, 211, 252, 0.35);
+  --shadow: rgba(0, 0, 0, 0.45);
+  --button-bg: rgba(11, 16, 36, 0.9);
+  --button-text: #edf3ff;
+  --button-border: rgba(132, 162, 255, 0.45);
+}
+
+body.light-theme {
+  --bg: #edf4ff;
+  --bg-2: #dfefff;
+  --panel: rgba(255, 255, 255, 0.78);
+  --panel-border: rgba(89, 117, 196, 0.28);
+  --text: #0f172a;
+  --muted: #475569;
+  --accent: #2563eb;
+  --accent-2: #7c3aed;
+  --glow: rgba(59, 130, 246, 0.16);
+  --shadow: rgba(84, 99, 129, 0.18);
+  --button-bg: rgba(255, 255, 255, 0.82);
+  --button-text: #0f172a;
+  --button-border: rgba(71, 85, 105, 0.25);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  min-height: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  background:
+    radial-gradient(circle at top, rgba(124, 92, 255, 0.22), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(34, 211, 238, 0.18), transparent 30%),
+    linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%);
+  color: var(--text);
+}
+
+body {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  overflow-x: hidden;
+  transition: background 0.25s ease, color 0.25s ease;
+}
+
+.theme-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 10;
+  border: 1px solid var(--button-border);
+  background: var(--button-bg);
+  color: var(--button-text);
+  border-radius: 999px;
+  width: 3rem;
+  height: 3rem;
+  display: grid;
+  place-items: center;
+  font-size: 1.2rem;
+  cursor: pointer;
+  box-shadow: 0 8px 25px var(--shadow);
+  transition: transform 0.2s ease, background 0.25s ease, color 0.25s ease;
+}
+
+.theme-toggle:hover {
+  transform: translateY(-1px);
+}
+
+.confetti-button {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  padding: 0.55rem 0.9rem;
+  border: 1px solid var(--button-border);
+  border-radius: 999px;
+  background: var(--button-bg);
+  color: var(--button-text);
+  cursor: pointer;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  box-shadow: 0 8px 25px var(--shadow);
+}
+
+#confetti-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  pointer-events: none;
+  z-index: 30;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(2px 2px at 10% 20%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 30% 40%, rgba(255,255,255,0.75), transparent),
+    radial-gradient(2px 2px at 50% 70%, rgba(255,255,255,0.7), transparent),
+    radial-gradient(2px 2px at 70% 25%, rgba(255,255,255,0.8), transparent),
+    radial-gradient(2px 2px at 90% 60%, rgba(255,255,255,0.7), transparent);
+  background-repeat: repeat;
+  background-size: 280px 280px;
+  opacity: 0.7;
+  pointer-events: none;
+}
+
+.page-shell {
+  width: min(90vw, 960px);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.countdown-card {
+  position: relative;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  box-shadow: 0 30px 80px var(--shadow), 0 0 30px var(--glow);
+  padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1rem, 3vw, 2rem);
+  backdrop-filter: blur(10px);
+}
+
+.status {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: clamp(1rem, 2.4vw, 2.2rem);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.status-complete {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: var(--text);
+  text-shadow: 0 0 24px rgba(125, 211, 252, 0.4);
+}
+
+.countdown {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(0.7rem, 1.8vw, 1rem);
+  width: 100%;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.9rem, 2vw, 1.2rem) clamp(0.5rem, 1.2vw, 0.8rem);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  min-width: 0;
+}
+
+.value {
+  font-size: clamp(2rem, 5vw, 4.25rem);
+  font-weight: 700;
+  line-height: 1;
+  color: var(--text);
+  text-shadow: 0 0 20px rgba(125, 211, 252, 0.5);
+}
+
+.label {
+  margin-top: 0.7rem;
+  font-size: clamp(0.66rem, 1vw, 1rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 680px) {
+  .countdown-card {
+    padding: 1.5rem 1rem;
+  }
+
+  .countdown {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .value {
+    font-size: clamp(2.1rem, 10vw, 3.25rem);
+  }
+
+  .label {
+    letter-spacing: 0.1em;
+  }
+}

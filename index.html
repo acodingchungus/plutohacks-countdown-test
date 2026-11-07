@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PlutoHacks Countdown</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <canvas id="confetti-canvas" aria-hidden="true"></canvas>
+
+    <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Switch to light theme">
+      ☀️
+    </button>
+
+    <button id="test-confetti" class="confetti-button" type="button">Test confetti</button>
+
+    <main class="page-shell">
+      <section class="countdown-card" aria-live="polite">
+        <p id="status" class="status">Hacking starts in</p>
+        <div id="countdown" class="countdown" aria-label="Countdown timer">
+          <div class="time-block">
+            <span id="days" class="value">00</span>
+            <span class="label">Days</span>
+          </div>
+          <div class="time-block">
+            <span id="hours" class="value">00</span>
+            <span class="label">Hours</span>
+          </div>
+          <div class="time-block">
+            <span id="minutes" class="value">00</span>
+            <span class="label">Minutes</span>
+          </div>
+          <div class="time-block">
+            <span id="seconds" class="value">00</span>
+            <span class="label">Seconds</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+  </body>
+</html>
